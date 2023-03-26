@@ -1,0 +1,11 @@
+@import "_vars.scss";
+@import "_mixins.scss";
+@include font-face('Inter', 500, 'normal', './fonts/Inter-Medium.woff2');
+@include font-face('Inter', 800, 'normal', './fonts/Inter-ExtraBold.woff2');
+@import "_null.scss";
+
+.container {
+  width: 100%;
+  max-width: 536px;
+  margin: 200px auto;
+}

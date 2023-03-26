@@ -1,0 +1,13 @@
+@import "@/styles/_vars.scss";
+
+.result {
+  padding: 0 8px;
+  width: 100%;
+  border-radius: 6px;
+  background-color: $gray-100;
+  color: $gray-900;
+  font-size: 36px;
+  font-weight: 800;
+  text-align: right;
+  overflow: hidden;
+}

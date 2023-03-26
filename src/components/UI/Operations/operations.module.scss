@@ -1,0 +1,15 @@
+@import '@/styles/_mixins.scss';
+
+.operations {
+  display: flex;
+  justify-content: space-between;
+
+  >.operationButton {
+    font-size: 14px;
+    width: 52px;
+    height: 48px;
+  }
+  >.operationButtonActive {
+    @include btn_active
+  }
+}

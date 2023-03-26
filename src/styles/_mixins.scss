@@ -1,0 +1,15 @@
+@import "./_vars.scss";
+
+@mixin font-face($font-family, $font-weight, $font-style, $font-path) {
+  @font-face {
+    font-family: $font-family;
+    font-weight: $font-weight;
+    font-style: $font-style;
+    src: url($font-path) format('woff2');
+  }
+}
+
+@mixin btn_active {
+  background-color: $main-blue;
+  color: $main-white
+}
