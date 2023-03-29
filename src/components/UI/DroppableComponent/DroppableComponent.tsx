@@ -1,9 +1,12 @@
 import styles from './droppableComponent.module.scss';
-import { DragObjectFactory, useDrop } from 'react-dnd';
-import { it } from 'node:test';
+import { useDrop } from 'react-dnd';
+import { EQUALS, OPERATIONS, RESULT, INTS } from '@/components/hoc/draggableTypes';
 import { useState } from 'react';
-
-const data = [1, 2, 3, 4];
+import { DraggableComponent } from '@/components/hoc/DraggableComponent';
+import { Operations } from '@/components/UI/Operations/Operations';
+import { Result } from '@/components/UI/Result/Result';
+import { Equals } from '@/components/UI/Equals/Equals';
+import { Ints } from '@/components/UI/Ints/Ints';
 
 const Content = () => {
   return (
@@ -20,22 +23,57 @@ const Content = () => {
 };
 
 export const DroppableComponent = () => {
-  const [components, setComponents] = useState<number[]>([]);
+  const [components, setComponents] = useState<any>([]);
   const [{ isOver }, dropRef] = useDrop({
-    accept: ['result', 'calculatorItem'],
-    drop: (item: { id: number }) => addCalcToBoard(item.id),
+    accept: [RESULT, OPERATIONS, INTS, EQUALS],
+    drop: (item: unknown) => random(item),
     collect: (monitor) => ({
       isOver: monitor.isOver(),
     }),
   });
 
-  const addCalcToBoard = (id: number): void => {
-    const calcItems = data.filter((item) => id === item);
-    setComponents((calc) => [...calc, calcItems[0]]);
+  const random = (item: any) => {
+    const itemIndex = components.findIndex((component: any) => component.id === item.id);
+    if (itemIndex === -1) {
+      setComponents((prev: []) => [...prev, item]);
+    }
+  };
+
+  const renderDragItems = (item: any, index: any) => {
+    const { type, id } = item;
+    switch (type) {
+      case OPERATIONS:
+        return (
+          <DraggableComponent key={id} type={type} id={id}>
+            <Operations />
+          </DraggableComponent>
+        );
+      case RESULT:
+        return (
+          <DraggableComponent type={type} id={id} key={id}>
+            <Result />
+          </DraggableComponent>
+        );
+      case EQUALS:
+        return (
+          <DraggableComponent type={type} id={id} key={id}>
+            <Equals />
+          </DraggableComponent>
+        );
+      case INTS:
+        return (
+          <DraggableComponent type={type} id={id} key={id}>
+            <Ints />
+          </DraggableComponent>
+        );
+      default:
+        return null;
+    }
   };
   return (
-    <div ref={dropRef}>
-      <Content />
+    <div ref={dropRef} className={styles.wrapper}>
+      {components.length === 0 ? <Content /> : null}
+      {components.map(renderDragItems)}
     </div>
   );
 };

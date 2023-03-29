@@ -1,6 +1,7 @@
 import styles from './draggableComponent.module.scss';
 import { useDrag } from 'react-dnd';
 import React from 'react';
+import { RESULT } from '@/components/hoc/draggableTypes';
 interface IDraggableComponent {
   children: JSX.Element;
   type: string;
@@ -12,11 +13,18 @@ interface IDraggableComponent {
 export const DraggableComponent = ({ children, type, id }: IDraggableComponent) => {
   const [{ isDragging }, drag] = useDrag({
     type,
-    item: { id },
+    item: { id, type },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
   });
+
+  const constraintsResult = {
+    top: 0,
+  };
+  const constraintsOthers = {
+    top: 80,
+  };
   // TODO: отдельные функции для компонентов в drop и не в drop. В функциях будет меняеться состояние можно ли нажать на кнопку или нет.
   // Т. е. нужно создать props соответствующий ещё и стейт.
   return (
