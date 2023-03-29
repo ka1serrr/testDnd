@@ -4,19 +4,21 @@ import { DraggableComponent } from '@/components/hoc/DraggableComponent';
 import { Operations } from '@/components/UI/Operations/Operations';
 import { Equals } from '@/components/UI/Equals/Equals';
 import { Result } from '@/components/UI/Result/Result';
+import { RESULT, OPERATIONS, INTS, EQUALS } from '@/components/hoc/draggableTypes';
+
 export const Calculator = () => {
   return (
     <div className={styles.calculator}>
-      <DraggableComponent>
+      <DraggableComponent type={RESULT} id={1}>
         <Result />
       </DraggableComponent>
-      <DraggableComponent>
+      <DraggableComponent type={OPERATIONS} id={2}>
         <Operations />
       </DraggableComponent>
-      <DraggableComponent>
+      <DraggableComponent type={INTS} id={3}>
         <Ints />
       </DraggableComponent>
-      <DraggableComponent>
+      <DraggableComponent type={EQUALS} id={4}>
         <Equals />
       </DraggableComponent>
     </div>

@@ -5,7 +5,7 @@ button {
   transition: border 0.1s ease-in;
   display: block;
   border: 1px solid $main-grey;
-  border-radius: 6px;
+  border-radius: $br6;
   text-align: center;
 
   &:hover {
