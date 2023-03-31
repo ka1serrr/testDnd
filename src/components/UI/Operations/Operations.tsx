@@ -1,16 +1,17 @@
 import styles from './operations.module.scss';
-import { OPERATIONS } from '@/data/data';
+
 import { Button } from '@/components/UI/Button/Button';
 import { useActions } from '@/hooks/useActions';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import clsx from 'clsx';
+import { IFOrData } from '@/data/data';
 
-const Content = () => {
+const Content = ({data}: IFOrData) => {
   const operationState = useTypedSelector((state) => state.result.operation);
   const { operate } = useActions();
   return (
     <div className={styles.operations}>
-      {OPERATIONS.map((operation) => {
+      {data.map((operation) => {
         const operationButton = clsx(
           styles.operationButton,
           operation.value == operationState && styles.operationButtonActive,
@@ -28,6 +29,6 @@ const Content = () => {
     </div>
   );
 };
-export const Operations = () => {
-  return <Content />;
+export const Operations = ({data}: IFOrData) => {
+  return <Content data={data}/>;
 };

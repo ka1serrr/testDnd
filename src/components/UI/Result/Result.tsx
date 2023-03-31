@@ -1,15 +1,29 @@
 import styles from './result.module.scss';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { useFontDecrease } from '@/hooks/useFontDecrease';
+import { IFOrData } from '@/data/data';
 
-export const Result = () => {
+
+
+
+const Content = ({data}: IFOrData) => {
   const { showingValue } = useTypedSelector((state) => state.result);
   const { ref, fontSize } = useFontDecrease({ initialFontSize: 36, maxWidth: 241, text: showingValue });
   return (
-    <div className={styles.result}>
-      <p ref={ref} style={{ fontSize }}>
-        {showingValue}
-      </p>
-    </div>
+    <>
+      {data.map(item => (
+        <div className={styles.result}>
+          <p ref={ref} style={{ fontSize }}>
+            {showingValue}
+          </p>
+        </div>
+      ))}
+    </>
   );
+}
+
+
+export const Result = ({data}: IFOrData) => {
+  return <Content data={data}/>
 };
+
