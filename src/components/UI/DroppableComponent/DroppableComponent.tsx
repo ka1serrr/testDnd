@@ -1,7 +1,7 @@
 import styles from './droppableComponent.module.scss';
 import { useDrop } from 'react-dnd';
 import { EQUALS, OPERATIONS, RESULT, INTS } from '@/components/hoc/draggableTypes';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { DraggableComponent } from '@/components/hoc/DraggableComponent';
 import { Operations } from '@/components/UI/Operations/Operations';
 import { Result } from '@/components/UI/Result/Result';
@@ -23,12 +23,14 @@ const Content = () => {
 };
 
 export const DroppableComponent = () => {
+  const ref = useRef<HTMLDivElement>(null);
   const [components, setComponents] = useState<any>([]);
-  const [{ isOver }, dropRef] = useDrop({
+  const [{ isOver, handlerId }, dropRef] = useDrop({
     accept: [RESULT, OPERATIONS, INTS, EQUALS],
     drop: (item: unknown) => random(item),
     collect: (monitor) => ({
       isOver: monitor.isOver(),
+      handlerId: monitor.getHandlerId(),
     }),
   });
 
@@ -39,30 +41,30 @@ export const DroppableComponent = () => {
     }
   };
 
-  const renderDragItems = (item: any, index: any) => {
+  const renderDragItems = (item: any, index: number) => {
     const { type, id } = item;
     switch (type) {
       case OPERATIONS:
         return (
-          <DraggableComponent key={id} type={type} id={id}>
+          <DraggableComponent key={id} type={type} id={id} index={index}>
             <Operations />
           </DraggableComponent>
         );
       case RESULT:
         return (
-          <DraggableComponent type={type} id={id} key={id}>
+          <DraggableComponent type={type} id={id} key={id} index={index}>
             <Result />
           </DraggableComponent>
         );
       case EQUALS:
         return (
-          <DraggableComponent type={type} id={id} key={id}>
+          <DraggableComponent type={type} id={id} key={id} index={index}>
             <Equals />
           </DraggableComponent>
         );
       case INTS:
         return (
-          <DraggableComponent type={type} id={id} key={id}>
+          <DraggableComponent type={type} id={id} key={id} index={index}>
             <Ints />
           </DraggableComponent>
         );
@@ -73,7 +75,7 @@ export const DroppableComponent = () => {
   return (
     <div ref={dropRef} className={styles.wrapper}>
       {components.length === 0 ? <Content /> : null}
-      {components.map(renderDragItems)}
+      {components.map((item: any, i: number) => renderDragItems(item, i))}
     </div>
   );
 };

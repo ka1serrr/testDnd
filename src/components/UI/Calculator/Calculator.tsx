@@ -9,16 +9,16 @@ import { RESULT, OPERATIONS, INTS, EQUALS } from '@/components/hoc/draggableType
 export const Calculator = () => {
   return (
     <div className={styles.calculator}>
-      <DraggableComponent type={RESULT} id={1}>
+      <DraggableComponent type={RESULT} id={1} index={0}>
         <Result />
       </DraggableComponent>
-      <DraggableComponent type={OPERATIONS} id={2}>
+      <DraggableComponent type={OPERATIONS} id={2} index={1}>
         <Operations />
       </DraggableComponent>
-      <DraggableComponent type={INTS} id={3}>
+      <DraggableComponent type={INTS} id={3} index={2}>
         <Ints />
       </DraggableComponent>
-      <DraggableComponent type={EQUALS} id={4}>
+      <DraggableComponent type={EQUALS} id={4} index={3}>
         <Equals />
       </DraggableComponent>
     </div>
