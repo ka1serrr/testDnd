@@ -49,14 +49,14 @@ export const DroppableComponent = () => {
   };
 
   const moveComponent = useCallback((dragIndex: number, hoverIndex: number) => {
-    setComponents((prevItems: IDraggedItemsSliceTypes) => {
-      update(prevItems, {
+    setComponents((prevCards: any) =>
+      update(prevCards, {
         $splice: [
           [dragIndex, 1],
-          [hoverIndex, 0, prevItems[dragIndex]],
+          [hoverIndex, 0, prevCards[dragIndex]],
         ],
-      });
-    });
+      }),
+    );
   }, []);
 
   const className = clsx(styles.dropComponent, canDrop && styles.canDrop);
