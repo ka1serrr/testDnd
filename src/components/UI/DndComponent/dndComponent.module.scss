@@ -1,0 +1,14 @@
+@import "@/styles/_vars.scss";
+
+.hocWrapper {
+  background: $main-white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06), 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 4px;
+  border-radius: $br4;
+  margin-bottom: 12px;
+  cursor: pointer;
+}
+
+.hocIsDragging {
+  opacity: .5;
+}

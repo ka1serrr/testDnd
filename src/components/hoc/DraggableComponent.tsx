@@ -40,7 +40,7 @@ export const DraggableComponent = ({ type, id, index }: IDraggableComponent) => 
   if (type === OPERATIONS) {
     return (
       <>
-        <div className={styles.hocWrapper} ref={drag}>
+        <div className={classNames} ref={drag}>
           <Operations />
         </div>
       </>
@@ -50,7 +50,7 @@ export const DraggableComponent = ({ type, id, index }: IDraggableComponent) => 
   if (type === INTS) {
     return (
       <>
-        <div className={styles.hocWrapper} ref={drag}>
+        <div className={classNames} ref={drag}>
           <Ints />
         </div>
       </>
@@ -59,7 +59,7 @@ export const DraggableComponent = ({ type, id, index }: IDraggableComponent) => 
 
   return (
     <>
-      <div className={styles.hocWrapper} ref={drag}>
+      <div className={classNames} ref={drag}>
         <Equals />
       </div>
     </>

@@ -32,16 +32,6 @@
   }
 }
 
-.dragIsDropped {
-  border: none;
-
-  .title {
-    display: none;
-    >span {
-      display: none;
-    }
-  }
-  >img {
-    display: none;
-  }
+.canDrop {
+  background: #F0F9FF;
 }
