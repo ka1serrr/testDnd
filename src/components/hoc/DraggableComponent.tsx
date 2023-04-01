@@ -2,13 +2,13 @@ import styles from './draggableComponent.module.scss';
 import { useDrag } from 'react-dnd';
 import React from 'react';
 import { Ints } from '@/components/UI/Ints/Ints';
-import { TDataItem } from '@/data/data';
-import { EQUALS, INTS, OPERATIONS, RESULT } from '@/components/hoc/draggableTypes';
+import { INTS, OPERATIONS, RESULT } from '@/components/hoc/draggableTypes';
 import { Operations } from '@/components/UI/Operations/Operations';
 import { Equals } from '@/components/UI/Equals/Equals';
 import { Result } from '@/components/UI/Result/Result';
+import clsx from 'clsx';
 
-interface IDraggableComponent {
+export interface IDraggableComponent {
   type: string;
   id: string;
   index?: number;
@@ -25,14 +25,16 @@ export const DraggableComponent = ({ type, id, index }: IDraggableComponent) => 
     }),
   });
 
+  const classNames = clsx(styles.hocWrapper, isDragging && styles.hocIsDragging);
+
   if (type === RESULT) {
-    return  (
+    return (
       <>
-        <div className={styles.hocWrapper} ref={drag}>
-          <Result/>
+        <div className={classNames} ref={drag}>
+          <Result />
         </div>
       </>
-    )
+    );
   }
 
   if (type === OPERATIONS) {
@@ -42,7 +44,7 @@ export const DraggableComponent = ({ type, id, index }: IDraggableComponent) => 
           <Operations />
         </div>
       </>
-    )
+    );
   }
 
   if (type === INTS) {
@@ -61,5 +63,5 @@ export const DraggableComponent = ({ type, id, index }: IDraggableComponent) => 
         <Equals />
       </div>
     </>
-  )
+  );
 };

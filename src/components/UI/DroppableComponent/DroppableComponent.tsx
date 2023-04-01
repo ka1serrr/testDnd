@@ -2,7 +2,15 @@ import styles from './droppableComponent.module.scss';
 import { useDrop } from 'react-dnd';
 import { EQUALS, OPERATIONS, RESULT, INTS } from '@/components/hoc/draggableTypes';
 import { useRef, useState } from 'react';
-import { DraggableComponent } from '@/components/hoc/DraggableComponent';
+import { DraggableComponent, IDraggableComponent } from '@/components/hoc/DraggableComponent';
+import { useActions } from '@/hooks/useActions';
+import { useTypedSelector } from '@/hooks/useTypedSelector';
+
+export interface IDragComponent {
+  type: string;
+  id: string;
+  index?: number;
+}
 
 const Content = () => {
   return (
@@ -20,59 +28,32 @@ const Content = () => {
 
 export const DroppableComponent = () => {
   const ref = useRef<HTMLDivElement>(null);
-  const [components, setComponents] = useState<any>([]);
+
+  const { setItems } = useActions();
+  const components = useTypedSelector((state) => state.draggedItems.items);
+
   const [{ isOver, handlerId }, dropRef] = useDrop({
     accept: [RESULT, OPERATIONS, INTS, EQUALS],
-    drop: (item: unknown) => random(item),
+    drop: (item: IDragComponent) => setItems(item),
     collect: (monitor) => ({
       isOver: monitor.isOver(),
       handlerId: monitor.getHandlerId(),
     }),
   });
 
-  const random = (item: any) => {
-    const itemIndex = components.findIndex((component: any) => component.id === item.id);
-    if (itemIndex === -1) {
-      setComponents((prev: []) => [...prev, item]);
-    }
-  };
-
-  // const renderDragItems = (item: any, index: number) => {
-  //   const { type, id } = item;
-  //   switch (type) {
-  //     case OPERATIONS:
-  //       return (
-  //         <DraggableComponent key={id} type={type} id={id} index={index}>
-  //           <Operations />
-  //         </DraggableComponent>
-  //       );
-  //     case RESULT:
-  //       return (
-  //         <DraggableComponent type={type} id={id} key={id} index={index}>
-  //           <Result />
-  //         </DraggableComponent>
-  //       );
-  //     case EQUALS:
-  //       return (
-  //         <DraggableComponent type={type} id={id} key={id} index={index}>
-  //           <Equals />
-  //         </DraggableComponent>
-  //       );
-  //     case INTS:
-  //       return (
-  //         <DraggableComponent type={type} id={id} key={id} index={index}>
-  //           <Ints />
-  //         </DraggableComponent>
-  //       );
-  //     default:
-  //       return null;
+  // const setDnd = (item: IDraggableComponent) => {
+  //   const itemIndex = components.findIndex((component: IDragComponent) => component.id === item.id);
+  //   if (itemIndex === -1) {
+  //     setComponents((prev: []) => [...prev, item]);
   //   }
   // };
 
   return (
     <div ref={dropRef} className={styles.wrapper}>
       {components.length === 0 ? <Content /> : null}
-      {components.map((item: any, index: number) => <DraggableComponent type={item.type} id={item.id}/>)}
+      {components.map((item: any, index: number) => (
+        <DraggableComponent type={item.type} id={item.id} index={index} />
+      ))}
     </div>
   );
 };

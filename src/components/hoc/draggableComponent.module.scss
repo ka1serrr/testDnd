@@ -8,9 +8,13 @@
   cursor: pointer;
 }
 
+.hocIsDragging {
+  opacity: .5;
+}
+
 .hocWrapperDragged {
   padding: 0;
   box-shadow: none;
-  opacity: .5%;
+  opacity: .5;
   margin-bottom: 12px;
 }

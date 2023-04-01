@@ -1,5 +1,4 @@
 import styles from './calculator.module.scss';
-import { Ints } from '@/components/UI/Ints/Ints';
 import { DraggableComponent } from '@/components/hoc/DraggableComponent';
 import {DATA as data} from '@/data/data';
 
