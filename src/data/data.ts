@@ -1,4 +1,4 @@
-type TData = {
+export type TData = {
   type: string;
   id: string;
   data: TDataItem;
@@ -9,10 +9,6 @@ export type TDataItem = {
   text: string | number;
 }[];
 
-// export type TSingleData = {
-//   value: number | string,
-//   text: number | string,
-// }
 
 
 export const DATA:TData = [

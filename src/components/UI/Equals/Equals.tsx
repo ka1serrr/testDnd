@@ -6,12 +6,12 @@ import { IFOrData } from '@/data/data';
 
 
 
-const Content = ({data}: IFOrData) => {
+const Content = ({data, }: IFOrData) => {
   const { makeResult } = useActions();
   return (
     <>
       {data.map(btn => (
-        <Button key={btn.value} value={btn.value} handleClick={makeResult} className={styles['equal']}/>
+        <Button key={btn.value} value={btn.value} handleClick={makeResult} className={styles['equal']} />
       ))}
     </>
   )
@@ -19,6 +19,6 @@ const Content = ({data}: IFOrData) => {
 
 
 
-export const Equals = ({data}: IFOrData) => {
+export const Equals = ({data, }: IFOrData) => {
   return <Content data={data}/>
 };

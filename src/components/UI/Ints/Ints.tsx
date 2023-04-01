@@ -1,5 +1,5 @@
 import styles from './ints.module.scss';
-import { IFOrData, INT_DATA, TDataItem } from '@/data/data';
+import { IFOrData } from '@/data/data';
 import { Button } from '@/components/UI/Button/Button';
 import { useActions } from '@/hooks/useActions';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
