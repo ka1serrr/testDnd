@@ -7,7 +7,7 @@ const Content = () => {
   return (
     <>
       {data.map((item , index) => (
-      <DraggableComponent type={item.type} id={item.id} index={index} data={item.data} key={item.type}/>
+      <DraggableComponent type={item.type} id={item.id} index={index} key={item.type}/>
     ))}
     </>
   )

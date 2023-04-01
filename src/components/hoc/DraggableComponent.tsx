@@ -11,13 +11,12 @@ import { Result } from '@/components/UI/Result/Result';
 interface IDraggableComponent {
   type: string;
   id: string;
-  data: TDataItem;
   index?: number;
 }
 // h 448px
 // h result 55px
 
-export const DraggableComponent = ({ type, id, data, index }: IDraggableComponent) => {
+export const DraggableComponent = ({ type, id, index }: IDraggableComponent) => {
   const [{ isDragging }, drag] = useDrag({
     type: type,
     item: { id, type, index },
@@ -30,7 +29,7 @@ export const DraggableComponent = ({ type, id, data, index }: IDraggableComponen
     return  (
       <>
         <div className={styles.hocWrapper} ref={drag}>
-          <Result data={data}/>
+          <Result/>
         </div>
       </>
     )
@@ -40,7 +39,7 @@ export const DraggableComponent = ({ type, id, data, index }: IDraggableComponen
     return (
       <>
         <div className={styles.hocWrapper} ref={drag}>
-          <Operations data={data}/>
+          <Operations />
         </div>
       </>
     )
@@ -50,7 +49,7 @@ export const DraggableComponent = ({ type, id, data, index }: IDraggableComponen
     return (
       <>
         <div className={styles.hocWrapper} ref={drag}>
-          <Ints data={data}/>
+          <Ints />
         </div>
       </>
     );
@@ -59,7 +58,7 @@ export const DraggableComponent = ({ type, id, data, index }: IDraggableComponen
   return (
     <>
       <div className={styles.hocWrapper} ref={drag}>
-        <Equals data={data}/>
+        <Equals />
       </div>
     </>
   )

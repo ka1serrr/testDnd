@@ -4,9 +4,9 @@ import { Button } from '@/components/UI/Button/Button';
 import { useActions } from '@/hooks/useActions';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import clsx from 'clsx';
-import { IFOrData } from '@/data/data';
+import { IFOrData, OPERTAIONS as data } from '@/data/data';
 
-const Content = ({data}: IFOrData) => {
+const Content = () => {
   const operationState = useTypedSelector((state) => state.result.operation);
   const { operate } = useActions();
   return (
@@ -29,6 +29,6 @@ const Content = ({data}: IFOrData) => {
     </div>
   );
 };
-export const Operations = ({data}: IFOrData) => {
-  return <Content data={data}/>;
+export const Operations = () => {
+  return <Content />;
 };

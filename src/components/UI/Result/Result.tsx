@@ -1,12 +1,12 @@
 import styles from './result.module.scss';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { useFontDecrease } from '@/hooks/useFontDecrease';
-import { IFOrData } from '@/data/data';
+import { IFOrData, RESULT as data } from '@/data/data';
 
 
 
 
-const Content = ({data}: IFOrData) => {
+const Content = () => {
   const { showingValue } = useTypedSelector((state) => state.result);
   const { ref, fontSize } = useFontDecrease({ initialFontSize: 36, maxWidth: 241, text: showingValue });
   return (
@@ -23,7 +23,7 @@ const Content = ({data}: IFOrData) => {
 }
 
 
-export const Result = ({data}: IFOrData) => {
-  return <Content data={data}/>
+export const Result = () => {
+  return <Content />
 };
 

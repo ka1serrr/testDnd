@@ -72,7 +72,7 @@ export const DroppableComponent = () => {
   return (
     <div ref={dropRef} className={styles.wrapper}>
       {components.length === 0 ? <Content /> : null}
-      {components?.map((item: any, i:number) => <DraggableComponent key={item.type} type={item.type} id={item.id} data={item} index={i}/>)}
+      {components.map((item: any, index: number) => <DraggableComponent type={item.type} id={item.id}/>)}
     </div>
   );
 };

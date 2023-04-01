@@ -1,12 +1,12 @@
 import styles from './equals.module.scss';
 import { Button } from '@/components/UI/Button/Button';
 import { useActions } from '@/hooks/useActions';
-import { IFOrData } from '@/data/data';
+import { EQUAL as data } from '@/data/data';
 
 
 
 
-const Content = ({data, }: IFOrData) => {
+const Content = () => {
   const { makeResult } = useActions();
   return (
     <>
@@ -19,6 +19,6 @@ const Content = ({data, }: IFOrData) => {
 
 
 
-export const Equals = ({data, }: IFOrData) => {
-  return <Content data={data}/>
+export const Equals = () => {
+  return <Content />
 };
