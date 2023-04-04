@@ -1,6 +1,6 @@
 export type TData = {
   type: string;
-  id: string;
+  id: number;
   data: TDataItem;
 }[];
 
@@ -9,17 +9,15 @@ export type TDataItem = {
   text: string | number;
 }[];
 
-
-
-export const DATA:TData = [
+export const DATA: TData = [
   {
     type: 'result',
-    id: 'result',
-    data: [{value: '0', text: 0}]
+    id: 14594589689,
+    data: [{ value: '0', text: 0 }],
   },
   {
     type: 'operations',
-    id: 'operations',
+    id: 1561616165,
     data: [
       { value: '/', text: '/' },
       { value: '*', text: 'x' },
@@ -29,7 +27,7 @@ export const DATA:TData = [
   },
   {
     type: 'ints',
-    id: 'ints',
+    id: 1561156236,
     data: [
       { value: '7', text: '7' },
       { value: '8', text: '8' },
@@ -44,15 +42,12 @@ export const DATA:TData = [
       { value: '.', text: ',' },
     ],
   },
-
   {
     type: 'equals',
-    id: 'equals',
+    id: 11561642564261,
     data: [{ value: '=', text: '=' }],
   },
-
 ];
-
 
 export const INTS: TDataItem = [
   { value: '7', text: '7' },
@@ -66,24 +61,18 @@ export const INTS: TDataItem = [
   { value: '3', text: '3' },
   { value: '0', text: '0' },
   { value: '.', text: ',' },
-]
+];
 
 export const OPERTAIONS: TDataItem = [
   { value: '/', text: '/' },
   { value: '*', text: 'x' },
   { value: '-', text: '-' },
   { value: '+', text: '+' },
-]
+];
 
-export const RESULT: TDataItem = [
-  {value: '0', text: 0}
-]
+export const RESULT: TDataItem = [{ value: '0', text: 0 }];
 
-
-export const EQUAL: TDataItem = [
-  { value: '=', text: '=' }
-]
-
+export const EQUAL: TDataItem = [{ value: '=', text: '=' }];
 
 export interface IFOrData {
   data: TDataItem;
