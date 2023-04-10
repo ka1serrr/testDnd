@@ -19,6 +19,6 @@ const Content = () => {
   );
 };
 
-export const Result = ({ id }: { id: number }) => {
-  return <Content key={id} />;
+export const Result = () => {
+  return <Content />;
 };

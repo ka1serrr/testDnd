@@ -1,5 +1,5 @@
 import styles from './dndComponent.module.scss';
-import { IDraggableComponent } from '@/components/hoc/DraggableComponent';
+
 import { useDrag, useDrop, XYCoord } from 'react-dnd';
 import { EQUALS, INTS, OPERATIONS, RESULT } from '@/components/hoc/draggableTypes';
 
@@ -9,17 +9,17 @@ import { Operations } from '@/components/UI/Operations/Operations';
 import { Ints } from '@/components/UI/Ints/Ints';
 import { Equals } from '@/components/UI/Equals/Equals';
 import clsx from 'clsx';
-import { IDragComponent } from '@/components/UI/DroppableComponent/DroppableComponent';
+import { IDragComponentFirstDrag } from '@/types/types';
 
-interface IDnDComponent extends IDraggableComponent {
+interface IDnDComponent extends IDragComponentFirstDrag {
   moveComponent: any;
 }
 
-export const DndComponent = ({ type, id, index, moveComponent }: IDnDComponent) => {
+export const DndComponent = ({ type, id, index, moveComponent, firstDrag }: IDnDComponent) => {
   const [{ isDragging, didDrop }, drag] = useDrag({
     type,
     item: () => {
-      return { id, index, type };
+      return { id, index, type, firstDrag };
     },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
@@ -54,14 +54,16 @@ export const DndComponent = ({ type, id, index, moveComponent }: IDnDComponent) 
 
       const hoverClientY = (clientOffset as XYCoord).y - hoverBoundingRect.top;
 
-      // @ts-ignore
-      if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
-        return;
+      if (hoverIndex) {
+        if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
+          return;
+        }
       }
 
-      // @ts-ignore
-      if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
-        return;
+      if (hoverIndex) {
+        if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
+          return;
+        }
       }
 
       moveComponent(item, dragIndex, hoverIndex);
@@ -80,7 +82,7 @@ export const DndComponent = ({ type, id, index, moveComponent }: IDnDComponent) 
     return (
       <>
         <div className={classNames} ref={ref} data-handler-id={handlerId} key={id}>
-          <Result id={id} />
+          <Result />
         </div>
       </>
     );

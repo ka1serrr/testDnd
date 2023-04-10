@@ -6,20 +6,16 @@ import { Operations } from '@/components/UI/Operations/Operations';
 import { Equals } from '@/components/UI/Equals/Equals';
 import { Result } from '@/components/UI/Result/Result';
 import clsx from 'clsx';
+import { IDraggComponentFirstDrag } from '@/types/types';
 
-export interface IDraggableComponent {
-  type: string;
-  id: number;
-  index?: number;
-}
 // h 448px1
 // h result 55px
 
-export const DraggableComponent = ({ type, id, index }: IDraggableComponent) => {
+export const DraggableComponent = ({ type, id, index, firstDrag }: IDraggComponentFirstDrag) => {
   const [{ isDragging, didDrop }, drag] = useDrag({
     type: type,
     item: () => {
-      return { id, type, index };
+      return { id, type, index, firstDrag };
     },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
@@ -32,7 +28,7 @@ export const DraggableComponent = ({ type, id, index }: IDraggableComponent) => 
     return (
       <>
         <div className={classNames} ref={drag} key={id}>
-          <Result key={id} id={id} />
+          <Result />
         </div>
       </>
     );

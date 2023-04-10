@@ -1,17 +1,12 @@
 import styles from './droppableComponent.module.scss';
 import { useDrop } from 'react-dnd';
 import { EQUALS, OPERATIONS, RESULT, INTS } from '@/components/hoc/draggableTypes';
-import { useCallback, useEffect, useState } from 'react';
-import { IDraggableComponent } from '@/components/hoc/DraggableComponent';
+import { useState } from 'react';
+
 import clsx from 'clsx';
 import { DndComponent } from '@/components/UI/DndComponent/DndComponent';
 import update from 'immutability-helper';
-
-export interface IDragComponent {
-  type: string;
-  id: string;
-  index?: number;
-}
+import { IDragComponent, IDragComponentFirstDrag } from '@/types/types';
 
 const type = [RESULT, OPERATIONS, INTS, EQUALS];
 const Content = ({ className }: { className: string }) => {
@@ -30,25 +25,27 @@ const Content = ({ className }: { className: string }) => {
 
 export const DroppableComponent = () => {
   const [components, setComponents] = useState<any>([]);
-  const [{ isOver, canDrop }, dropRef] = useDrop({
+  const [{ isOver, canDrop, getItemType }, dropRef] = useDrop({
     accept: type,
-    drop: (item: IDragComponent) => setDnd(item),
+    hover: (item: IDragComponent) => setDnd(item),
     collect: (monitor) => ({
       canDrop: monitor.canDrop(),
       isOver: monitor.isOver(),
+      getItemType: monitor.getItemType(),
     }),
   });
 
-  const setDnd = (item: any) => {
-    const itemIndex = components.findIndex((component: IDragComponent) => component.id === item.id);
-    if (itemIndex === -1) {
-      setComponents((prev: []) => [...prev, item]);
+  const setDnd = (item: IDragComponent) => {
+    const itemIndex = components.findIndex((component: IDragComponent) => component.type === item.type);
+    if (itemIndex !== -1) {
+      return;
     }
+
+    setComponents((prev: []) => [...prev, item]);
   };
 
-  const moveComponent = (item: any, dragIndex: number, hoverIndex: number) => {
-    const itemIndex = components.findIndex((component: IDragComponent) => component.id === item.id);
-    if (itemIndex !== -1) {
+  const moveComponent = (item: IDragComponentFirstDrag, dragIndex: number, hoverIndex: number) => {
+    if (!item.firstDrag) {
       setComponents((prevCards: any) =>
         update(prevCards, {
           $splice: [
@@ -66,7 +63,14 @@ export const DroppableComponent = () => {
     <div ref={dropRef} className={styles.wrapper}>
       {components?.length === 0 ? <Content className={className} /> : null}
       {components?.map((item: any, index: number) => (
-        <DndComponent type={item?.type} id={item?.id} index={index} key={item?.id} moveComponent={moveComponent} />
+        <DndComponent
+          type={item?.type}
+          id={item?.id}
+          index={index}
+          key={item?.id}
+          moveComponent={moveComponent}
+          firstDrag={false}
+        />
       ))}
     </div>
   );

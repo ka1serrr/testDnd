@@ -6,7 +6,7 @@ const Content = () => {
   return (
     <>
       {data.map((item, index) => (
-        <DraggableComponent type={item.type} id={item.id} index={index} key={item.id} />
+        <DraggableComponent type={item.type} id={item.id} index={index} key={item.id} firstDrag={true} />
       ))}
     </>
   );
